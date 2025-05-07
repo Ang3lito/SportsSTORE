@@ -1,0 +1,127 @@
+﻿@using SportsStore.Infrastructure
+@model Product
+<div class="product-card">
+    <div class="product-header">
+        <h4>
+            @Model.Name
+            <span class="product-price">
+                <small>@Model.Price.ToString("c")</small>
+            </span>
+        </h4>
+    </div>
+    <form id="@Model.ProductID" asp-page="/Cart" method="post">
+        <input type="hidden" asp-for="ProductID" />
+        <input type="hidden" name="returnUrl"
+               value="@ViewContext.HttpContext.Request.PathAndQuery()" />
+        <div class="product-description">
+            @Model.Description
+            <button type="submit" class="add-to-cart-btn">
+                Add to Cart
+            </button>
+        </div>
+    </form>
+</div>
+<style>
+    .product-card {
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        margin: 10px;
+        padding: 10px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        transition: all 0.3s ease;
+    }
+
+        .product-card:hover {
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            transform: translateY(-2px);
+        }
+
+    .product-header {
+        background-color: #f8f9fa;
+        padding: 10px;
+        border-bottom: 1px solid #eee;
+        border-radius: 3px 3px 0 0;
+    }
+
+        .product-header h4 {
+            margin: 0;
+            font-size: 1.2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+    .product-price {
+        background-color: #000;
+        color: white;
+        padding: 5px 10px;
+        border-radius: 20px;
+        font-weight: normal;
+        display: inline-block;
+    }
+
+    .product-description {
+        padding: 10px;
+        position: relative;
+        min-height: 60px;
+    }
+
+    .add-to-cart-btn {
+        background-color: #000;
+        color: white;
+        border: none;
+        padding: 5px 12px;
+        border-radius: 4px;
+        cursor: pointer;
+        position: absolute;
+        right: 10px;
+        bottom: 10px;
+        transition: background-color 0.3s ease;
+    }
+
+        .add-to-cart-btn:hover {
+            background-color: #333;
+        }
+
+    /* Pagination styling - making active page black instead of blue */
+    .pagination a {
+        border: 1px solid #ddd;
+        padding: 5px 10px;
+        text-decoration: none;
+        color: #666;
+    }
+
+        .pagination a.active,
+        .pagination a:focus,
+        .pagination a:active,
+        .pagination a[aria-current="page"] {
+            background-color: #000 !important; /* Black background for active page */
+            color: white !important;
+            border-color: #000 !important;
+        }
+    /* Override any default Bootstrap styling that might be active */
+    .pagination .page-item.active .page-link {
+        background-color: #000 !important;
+        border-color: #000 !important;
+        color: white !important;
+    }
+
+    .pagination .page-link {
+        color: #666;
+    }
+
+        .pagination .page-link:hover {
+            background-color: #f8f9fa;
+            color: #000;
+        }
+    /* Target the specific Bootstrap/framework pagination styles */
+    .page-item.active .page-link {
+        background-color: #000 !important;
+        border-color: #000 !important;
+    }
+    /* For simple numbered pagination */
+    .pagination-simple .selected {
+        background-color: #000 !important;
+        color: white !important;
+    }
+</style>

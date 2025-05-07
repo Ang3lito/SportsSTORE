@@ -1,0 +1,47 @@
+﻿@model ProductsListViewModel
+@foreach (var p in Model.Products ?? Enumerable.Empty<Product>())
+{
+    <partial name="ProductSummary" model="p" />
+}
+<div class="text-center">
+    <div page-model="@Model.PagingInfo" page-action="Index"
+         page-classes-enabled="true"
+         page-class="btn btn-sm"
+         page-class-normal="btn-outline-secondary"
+         page-class-selected="btn-black"
+         page-url-category="@Model.CurrentCategory"
+         class="btn-group btn-group-sm gap-1 d-inline-flex">
+    </div>
+</div>
+
+<style>
+    /* Custom black button style for pagination */
+    .btn-black {
+        color: #fff;
+        background-color: #000;
+        border-color: #000;
+    }
+
+        .btn-black:hover {
+            color: #fff;
+            background-color: #333;
+            border-color: #333;
+        }
+
+        .btn-black:focus, .btn-black.focus {
+            box-shadow: 0 0 0 0.2rem rgba(0, 0, 0, 0.25);
+        }
+
+        .btn-black.disabled, .btn-black:disabled {
+            color: #fff;
+            background-color: #666;
+            border-color: #666;
+        }
+
+        .btn-black:not(:disabled):not(.disabled):active,
+        .btn-black:not(:disabled):not(.disabled).active {
+            color: #fff;
+            background-color: #000;
+            border-color: #000;
+        }
+</style>
